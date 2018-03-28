@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/museum'
+require_relative '../lib/patron'
 require 'pry'
 
 #iteration 0
@@ -23,7 +24,7 @@ class MuseumTest < MiniTest::Test
   def test_museum_defaults_no_exhibits
     dmns = Museum.new("Denver Museum of Nature and Science")
 
-    expected = []
+    expected = {}
     actual = dmns.exhibits
 
     assert_equal expected, actual
@@ -34,11 +35,28 @@ class MuseumTest < MiniTest::Test
     dmns.add_exhibit("Dead Sea Scrolls", 10)
     dmns.add_exhibit("Gems and Minerals", 0)
 
-    expected = [["Dead Sea Scrolls", 10], ["Gems and Minerals",0]]
+    expected = {"Dead Sea Scrolls" => 10, "Gems and Minerals" => 0}
     actual = dmns.exhibits
 
     assert_equal expected, actual
   end
-  
+
+  def test_it_can_generate_revenue
+    bob = Patron.new("Bob")
+    bob.add_interests("Gems and Minerals")
+    bob.add_interests("Dead Sea Scrolls")
+    bob.add_interests("Imax")
+
+    sally = Patron.new("Sally")
+    sally.add_interests("Dead Sea Scrolls")
+
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dmns.admit("bob")
+    dmns.admit("sally")
+    actual = dmns.revenue
+    expected = 40
+
+    assert_equal expected, actual
+  end
 end
 
