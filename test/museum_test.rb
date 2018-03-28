@@ -53,10 +53,29 @@ class MuseumTest < MiniTest::Test
     dmns = Museum.new("Denver Museum of Nature and Science")
     dmns.admit(bob)
     dmns.admit(sally)
+    
     actual = dmns.revenue
     expected = 40
 
     assert_equal expected, actual
+  end
+
+  def test_patrons_of_exhibit
+    bob = Patron.new("Bob")
+    bob.add_interests("Gems and Minerals")
+    bob.add_interests("Dead Sea Scrolls")
+    bob.add_interests("Imax")
+
+    sally = Patron.new("Sally")
+    sally.add_interests("Dead Sea Scrolls")
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dmns.patrons(sally)
+    dmns.patrons(bob)
+
+    expected = dmns.patrons_of("Dead Sea Scrolls")
+    actual = ["bob, sally"]
+    binding.pry
+    assert_equal = expected, actual
   end
 end
 
