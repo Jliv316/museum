@@ -10,6 +10,10 @@
         @exhibits << [exhibit, cost]
     end
 
+
+    def test
+    end
+    
   end
 
   
