@@ -17,12 +17,14 @@
     def admit(name)
         @revenue += 10
        
-        patron.interests.each do |interest|
+        name.interests.each do |interest|
             if interest == exhibits.key?(interest)
                 @revenue += exhibits[interest]
             end
         end
     end
+
+    
 
   end
 

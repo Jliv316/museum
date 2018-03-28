@@ -51,8 +51,8 @@ class MuseumTest < MiniTest::Test
     sally.add_interests("Dead Sea Scrolls")
 
     dmns = Museum.new("Denver Museum of Nature and Science")
-    dmns.admit("bob")
-    dmns.admit("sally")
+    dmns.admit(bob)
+    dmns.admit(sally)
     actual = dmns.revenue
     expected = 40
 
